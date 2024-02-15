@@ -1,0 +1,27 @@
+Introduction:
+
+This simple app will be used to generate a watcher list, e.g. People divided to posts for set amount of time.
+
+Basic features:
+1. Round the watch duration to lower 5 minutes for each of bookkeeping.
+2. Exporting as simple text to allow easier posting at char programs (Whatsapp/telegram).
+3. Minor but ability to set an arbitrary date. (Factoring daylight saving time?)
+4. Having more than a singular post.
+5. Free text comments when creating a list.
+6. Ability to edit the list generated.
+
+Advanced Features:
+1. Ability to support non-continual posts (E.g, watch starts at 19:00, ceases at 23:00 and resumes at 1:00)
+2. History, meaning that it will be possible to keep track on the posts each person has taken.
+3. Ability to group watch lists when deciding on the time each person will save.
+4. Using the history feature, making sure that no one is consistently at the same hours/posts.
+5. Minimum/Maximum time per watch.
+6. Set sublists within a given watcher list, meaning that certains times can be manned only by certain people.
+
+Super Advanced Features:
+1. Exporting and importing previous sessions. Logically, every consecutive watchlist should be grouped together.
+2. Ability to used previous sessions when calculating times and posts.
+
+App feature:
+1. Ability to set alarms so that your phone will ring when you should wake someone up.
+
