@@ -14,7 +14,7 @@ class WatcherList:
 
     def get_stringed_list(self) -> list[str]:
         stringed_list: list[str] = list()
-        watch_slot_format: str = "{watcher}, {watch_start}-{watch_finish}, duration: {duration}"
+        watch_slot_format: str = "{watcher}, {watch_start}-{watch_finish}, Duration: {duration}"
         for watcher_slot in self.watcher_list:
             watch_finish_str = watcher_slot.watch_time_end.strftime("%H:%M")
             if watcher_slot.watch_time_end.day != watcher_slot.watch_time_start.day:
