@@ -16,6 +16,10 @@ class PostDemandDuration:
         self.watch_start = watch_start
         self.watch_end = watch_end
 
+    @property
+    def post_duration(self):
+        return self.watch_end - self.watch_start
+
 
 @dataclass
 class PostDemand:
@@ -35,4 +39,4 @@ class PostDemand:
                 if (post_time_demand.watch_start <= post_time_demand_comparison.watch_start <= post_time_demand.watch_end) or \
                      (post_time_demand.watch_start <= post_time_demand_comparison.watch_end <= post_time_demand.watch_end):
                     raise ValueError("Received watch times for single post with intersection.")
-
+        self.required_post_times = required_post_times
