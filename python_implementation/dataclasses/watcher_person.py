@@ -25,3 +25,19 @@ class WatcherPerson:
 
     def pretty_str(self):
         return f"{self.first_name} {self.last_name} {self.nickname}".strip(" ")
+
+
+def compare_watcher_persons(first: WatcherPerson, second: WatcherPerson):
+    """
+    Returns true if the ids are the same or all identifications.
+    :param first:
+    :param second:
+    :return:
+    """
+    return \
+        (first._id == second._id or
+         (first.first_name == second.first_name and
+          first.last_name == second.last_name and
+          first.nickname == second.nickname and
+          first.phone_number == second.phone_number)
+         )

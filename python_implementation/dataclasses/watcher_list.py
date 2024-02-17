@@ -5,9 +5,11 @@ from python_implementation.dataclasses.watcher_slot import WatchSlot
 
 @dataclass
 class WatcherList:
+    post_name: str
     watcher_list: list[WatchSlot]
 
     def pretty_print(self):
+        print(f"post: {self.post_name}")
         stringed_list: list[str] = self.get_stringed_list()
         for stringed_slot in stringed_list:
             print(stringed_slot)

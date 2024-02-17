@@ -3,8 +3,40 @@ from datetime import datetime
 
 from python_implementation.dataclasses.post_demand import PostDemand, PostDemandDuration
 from python_implementation.dataclasses.watcher_list import WatcherList
-from python_implementation.dataclasses.watcher_person import WatcherPerson
+from python_implementation.dataclasses.watcher_person import WatcherPerson, compare_watcher_persons
 from python_implementation.dataclasses.watcher_slot import WatchSlot
+
+
+def are_watchers_unique(watcher_list: list[WatcherPerson]) -> bool:
+    """
+    Given a list, returns true if all items are unique, as defined by having unique ids and at least 1 property is
+    different
+    :param watcher_list:
+    :return:
+    """
+    for prime_watchman_index in range(len(watcher_list)):
+        for other_watchman_index in range(len(watcher_list)):
+            if prime_watchman_index == other_watchman_index:
+                continue
+            if compare_watcher_persons(watcher_list[prime_watchman_index], watcher_list[other_watchman_index]):
+                return False
+    return True
+
+
+def generate_simple_list(post_demand: PostDemand, available_watchmen: list[WatcherPerson]):
+    number_of_watchers: int = len(available_watchmen)
+    shuffled_watchman = random.sample(available_watchmen, len(available_watchmen))
+    required_time: PostDemandDuration = post_demand.required_post_times[0]
+    duration = required_time.post_duration
+    time_for_each_watchman = duration / number_of_watchers
+    watchlist: list[WatchSlot] = list()
+    dynamic_time = required_time.watch_start
+    for watchman in shuffled_watchman:
+        new_slot = WatchSlot(watcher=watchman, watch_time_start=dynamic_time,
+                             watch_time_end=dynamic_time + time_for_each_watchman)
+        watchlist.append(new_slot)
+        dynamic_time += time_for_each_watchman
+    return WatcherList(post_name=post_demand.post_name, watcher_list=watchlist)
 
 
 def generate_watcher_list(post_demand: PostDemand, available_watchmen: list[WatcherPerson], **kwargs) -> WatcherList:
@@ -15,23 +47,16 @@ def generate_watcher_list(post_demand: PostDemand, available_watchmen: list[Watc
     :return: A watcher list for a given post.
     """
     # Start with basic implementation.
-    number_of_watchers: int = len(available_watchmen)
-    if number_of_watchers < 1:
+    if len(available_watchmen) < 1:
         raise ValueError("Cannot generate a list with no watchmen.")
-    shuffled_watchman = random.sample(available_watchmen, len(available_watchmen))
-    # Verify person isn't listed twice.
+    if not are_watchers_unique(available_watchmen):
+        raise ValueError(f"Available watchmen contains duplicates or 2 people have the same identifications. "
+                         f"watchmen_list: {available_watchmen}")
+    if len(post_demand.required_post_times) > 1:
+        raise ValueError("Non-continues watch times are not supported.")
 
     # Assume a single post with continues time.
-    required_time: PostDemandDuration = post_demand.required_post_times[0]
-    duration = required_time.post_duration
-    time_for_each_watchman = duration/number_of_watchers
-    watchlist: list[WatchSlot] = list()
-    dynamic_time = required_time.watch_start
-    for watchman in shuffled_watchman:
-        new_slot = WatchSlot(watcher=watchman, watch_time_start=dynamic_time, watch_time_end=dynamic_time + time_for_each_watchman)
-        watchlist.append(new_slot)
-        dynamic_time += time_for_each_watchman
-    return WatcherList(watchlist)
+    return generate_simple_list(post_demand, available_watchmen)
 
 
 if __name__ == '__main__':
