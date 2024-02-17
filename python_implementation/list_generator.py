@@ -63,16 +63,27 @@ if __name__ == '__main__':
     demand: PostDemand = PostDemand(post_name="watchtower",
                                     required_post_times=(PostDemandDuration(datetime(year=1000, month=12, day=15, hour=12),
                                                                             datetime(year=1000, month=12, day=16, hour=12)), ))
-    watcher_person_test1 = WatcherPerson(first_name="mark1")
-    watcher_person_test2 = WatcherPerson(first_name="mark2")
-    watcher_person_test3 = WatcherPerson(first_name="mark3")
-    watcher_person_test4 = WatcherPerson(first_name="mark4")
-    watcher_person_test5 = WatcherPerson(first_name="mark5")
+    watcher_person_test1 = WatcherPerson(first_name="mark111")
+    watcher_person_test2 = WatcherPerson(first_name="mark222")
+    watcher_person_test3 = WatcherPerson(first_name="mark333")
+    watcher_person_test4 = WatcherPerson(first_name="mark444")
+    watcher_person_test5 = WatcherPerson(first_name="mark555")
+    watcher_person_test6 = WatcherPerson(first_name="mark666")
+    watcher_person_test7 = WatcherPerson(first_name="mark777")
+    watcher_person_test8 = WatcherPerson(first_name="mark888")
+    watcher_person_test9 = WatcherPerson(first_name="mark999")
+    watcher_person_test10 = WatcherPerson(first_name="mark000")
+
     possible_watchmen: list[WatcherPerson] = [watcher_person_test1,
                                               watcher_person_test2,
                                               watcher_person_test3,
                                               watcher_person_test4,
-                                              watcher_person_test5]
+                                              watcher_person_test5,
+                                              watcher_person_test6,
+                                              watcher_person_test7,
+                                              watcher_person_test8,
+                                              watcher_person_test9,
+                                              watcher_person_test10]
 
     da_list: WatcherList = generate_watcher_list(demand, possible_watchmen)
     da_list.pretty_print()
